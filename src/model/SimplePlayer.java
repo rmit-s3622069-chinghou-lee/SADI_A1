@@ -3,7 +3,7 @@ package model;
 import model.interfaces.DicePair;
 import model.interfaces.Player;
 
-public class GamePlayer implements Player {
+public class SimplePlayer implements Player {
 	
 	   private String playerID;
 	   private String playerNAME;
@@ -11,7 +11,7 @@ public class GamePlayer implements Player {
 	   private int playerPOINTS;
 	   private DicePair rollRESULT;
 
-	   public GamePlayer(String playerID, String playerNAME, int playerPOINTS)
+	   public SimplePlayer(String playerID, String playerNAME, int playerPOINTS)
 	   {
 	     
 	      this.playerID = playerID;
