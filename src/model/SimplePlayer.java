@@ -28,7 +28,7 @@ public class SimplePlayer implements Player {
 
 	@Override
 	public void setPlayerName(String playerName) {
-		 this.playerNAME = playerNAME;		
+		 this.playerNAME = playerName;		
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class SimplePlayer implements Player {
 
 	@Override
 	public void setPoints(int points) {
-		this.playerPOINTS = playerPOINTS;
+		this.playerPOINTS = points;
 		
 	}
 
