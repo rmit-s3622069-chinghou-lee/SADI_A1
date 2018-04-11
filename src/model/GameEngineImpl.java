@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import model.interfaces.GameEngine;
@@ -8,8 +9,7 @@ public class GameEngineImpl implements GameEngine  {
 
 	@Override
 	public boolean placeBet(Player player, int bet) {
-		// TODO Auto-generated method stub
-		return false;
+		return player.placeBet(bet);
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class GameEngineImpl implements GameEngine  {
 
 	@Override
 	public Collection<Player> getAllPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<Player> Player = new ArrayList<Player>();
+		return Player;
 	}
 
 }
