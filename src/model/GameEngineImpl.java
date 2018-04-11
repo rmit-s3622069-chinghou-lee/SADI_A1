@@ -44,7 +44,22 @@ public class GameEngineImpl implements GameEngine  {
 
 	@Override
 	public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
-		// TODO Auto-generated method stub
+	      if (gameEngineCallback == null)
+	      {
+	         throw new IllegalArgumentException("gameEngineCallback can not be null");
+	      }
+	      
+	      try {
+	    	  gameEngineCallback.
+	      }catch (IllegalArgumentException IAE){
+	    	  
+	      }finally {
+	    	  gameEngineCallbacks.add(gameEngineCallback);
+		      
+		      assert (gameEngineCallbacks.contains(gameEngineCallback));
+	      }
+	      
+	      
 		
 	}
 

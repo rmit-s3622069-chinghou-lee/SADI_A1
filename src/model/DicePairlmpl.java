@@ -4,22 +4,24 @@ import model.interfaces.DicePair;
 
 public class DicePairlmpl implements DicePair {
 
+	   private int dice1;
+	   private int dice2;
+	   private int numOfFaces;
+	  
+	
 	@Override
 	public int getDice1() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dice1;
 	}
 
 	@Override
 	public int getDice2() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dice2;
 	}
 
 	@Override
 	public int getNumFaces() {
-		// TODO Auto-generated method stub
-		return 0;
+		return numOfFaces;
 	}
 
 }

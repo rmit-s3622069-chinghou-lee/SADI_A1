@@ -5,16 +5,16 @@ import model.interfaces.Player;
 
 public class SimplePlayer implements Player {
 	
-	   private String playerID;
+	   private String playerId;
 	   private String playerNAME;
 	   private int playerBET;
 	   private int playerPOINTS;
 	   private DicePair rollRESULT;
 
-	   public SimplePlayer(String playerID, String playerNAME, int playerPOINTS)
+	   public SimplePlayer(String playerId, String playerNAME, int playerPOINTS)
 	   {
 	     
-	      this.playerID = playerID;
+	      this.playerId = playerId;
 	      this.playerNAME = playerNAME;
 	      this.playerBET = 0;
 	      this.playerPOINTS = playerPOINTS;
@@ -27,7 +27,7 @@ public class SimplePlayer implements Player {
 	}
 
 	@Override
-	public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerNAME) {
 		 this.playerNAME = playerNAME;		
 	}
 
@@ -37,22 +37,28 @@ public class SimplePlayer implements Player {
 	}
 
 	@Override
-	public void setPoints(int points) {
+	public void setPoints(int playerPOINTS) {
 		this.playerPOINTS = playerPOINTS;
 		
 	}
 
 	@Override
 	public String getPlayerId() {
-		return playerID;
+		return playerId;
 	}
 
 	@Override
 	public boolean placeBet(int bet) {
-		// if bet = 0, ?
-		// if bet < points, ?
-		// if bet > points, ?
-		return false;
+		if(bet < 0 || bet > playerPOINTS) {
+			// Not placing any bet
+			return false;
+		}else {
+			// Player points = player's point minus bet
+			playerPOINTS -= bet;
+			// set new player bet
+			this.playerBET = bet;
+			return true;
+		}
 	}
 
 	@Override
