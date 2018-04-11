@@ -27,13 +27,8 @@ public class SimplePlayer implements Player {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public void setPlayerName(String playerNAME) {
-		 this.playerNAME = playerNAME;		
-=======
 	public void setPlayerName(String playerName) {
 		 this.playerNAME = playerName;		
->>>>>>> branch 'master' of https://github.com/rmit-s3622069-chinghou-lee/SADI_A1.git
 	}
 
 	@Override
@@ -42,14 +37,8 @@ public class SimplePlayer implements Player {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public void setPoints(int playerPOINTS) {
-		this.playerPOINTS = playerPOINTS;
-=======
 	public void setPoints(int points) {
 		this.playerPOINTS = points;
->>>>>>> branch 'master' of https://github.com/rmit-s3622069-chinghou-lee/SADI_A1.git
-		
 	}
 
 	@Override
