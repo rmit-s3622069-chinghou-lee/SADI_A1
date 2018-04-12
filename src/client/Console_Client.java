@@ -81,7 +81,7 @@ public class Console_Client {
 					System.out.println("");
 					
 					_P.placeBet(_playerBet);
-					GEI.rollPlayer(_P, 100, 200, 100);
+					GEI.rollPlayer(_P, 1, 100, 20);
 				}else {
 					System.out.println("Invalid Input!\n");
 					continue;
