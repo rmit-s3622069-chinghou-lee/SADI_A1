@@ -101,7 +101,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	 */
 	public void playerResult(Player player, GameEngine gameEngine) {
 		// final results logged at Level.INFO
-		String output = String.format("Player: id= %d,  name= %s, points= %d", player.getPlayerId(),
+		String output = String.format("Player: id= %s,  name= %s, points= %s", player.getPlayerId(),
 				player.getPlayerName(), player.getPoints());
 		logger.log(Level.INFO, output);
 	}
