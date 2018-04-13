@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Formatter;
+import java.util.Locale;
+
 import model.interfaces.DicePair;
 import model.interfaces.Player;
 
@@ -76,5 +79,12 @@ public class SimplePlayer implements Player {
 		
 	}
 	
+	   public String toString()
+	   {
+		   String output = String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", getPlayerName(),
+				   getRollResult().getDice1(), getRollResult().getDice2(), getRollResult().getDice1() + getRollResult().getDice2());
+		   return output;
+
+	   }
 
 }
