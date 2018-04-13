@@ -12,9 +12,8 @@ import model.interfaces.Player;
 public class GameEngineImpl implements GameEngine {
 
 	private Collection<GameEngineCallback> GEC;
-	private Collection<Player> playerList;
-	private HashMap<Player, Integer> playerResult;
-	private HashMap<Player, Integer> finalResult;
+	private ArrayList<Player> playerList;
+	private ArrayList<Integer> result;
 	private GameEngineCallbackImpl GECI;
 	private DicePairImpl dicePair;
 	private int diceTotal;
@@ -22,7 +21,6 @@ public class GameEngineImpl implements GameEngine {
 	public GameEngineImpl() {
 		GEC = new ArrayList<GameEngineCallback>();
 		playerList = new ArrayList<Player>();
-		playerResult = new HashMap<>();
 		GECI = new GameEngineCallbackImpl();
 		dicePair = new DicePairImpl();
 	}
@@ -35,26 +33,22 @@ public class GameEngineImpl implements GameEngine {
 	@Override
 	public void rollPlayer(Player player, int initialDelay, int finalDelay, int delayIncrement) {
 
-		if (initialDelay <= 0 || finalDelay <= 0 || delayIncrement <= 0) {
-			System.out.println("No time present.\r\n");
+		if (initialDelay <= 0 || finalDelay <= 0 || delayIncrement <= 0 || player.equals(null)) {
+			System.out.println("Player unable to roll.\r\n");
 			return;
 		}
 
 		for (int delay = initialDelay; initialDelay < finalDelay; initialDelay += delayIncrement) {
 			dicePair = new DicePairImpl();
 			diceTotal = dicePair.getDice1() + dicePair.getDice2();
-			if (initialDelay < finalDelay) {
-				GECI.intermediateResult(player, dicePair, this);
-			} else {
-				GECI.result(player, dicePair, this);
-				playerResult.put(player, diceTotal);
-				break;
-			}
+			GECI.intermediateResult(player, dicePair, this);
+
 		}
-		
-		for(Player _player : playerList) {
-			if(_player.getPlayerId().equals(player.getPlayerId())) {
+		for (Player _player : playerList) {
+			if (_player.getPlayerId().equals(player.getPlayerId())) {
+				dicePair = new DicePairImpl();
 				_player.setRollResult(dicePair);
+				GECI.result(player, dicePair, this);
 			}
 		}
 
@@ -71,36 +65,40 @@ public class GameEngineImpl implements GameEngine {
 		for (int delay = initialDelay; initialDelay < finalDelay; initialDelay += delayIncrement) {
 			dicePair = new DicePairImpl();
 			diceTotal = dicePair.getDice1() + dicePair.getDice2();
-			String house = "House";
-			if (initialDelay < finalDelay) {
-				GECI.intermediateHouseResult(dicePair, this);
-			} else {
-				GECI.houseResult(dicePair, this);
-				calculateResult(playerResult, diceTotal);
-				break;
-			}
-		}
 
+			GECI.intermediateHouseResult(dicePair, this);
+
+		}
+		dicePair = new DicePairImpl();
+		diceTotal = dicePair.getDice1() + dicePair.getDice2();
+		GECI.houseResult(dicePair, this);
+		calculateResult(diceTotal, this);
 	}
 
-	/*
-	 * Reference Conversion Collection to Arraylist from stackoverflow
-	 * https://stackoverflow.com/questions/1968068/java-how-to-convert-type-collection-into-arraylist
-	 */
-	private void calculateResult(HashMap<Player, Integer> playerResult, int diceTotal) {
-		finalResult = new HashMap<>();
-		ArrayList<Player> getPlayerList = new ArrayList<Player>(getAllPlayers());
-		
-		if(getPlayerList.isEmpty()) {
-			System.out.println("No player present.\r\n");
-		}
-		
-		while(finalResult.isEmpty()) {
-			for (Player players: getPlayerList) {
-				
+	private void calculateResult(int houseDicePair, GameEngineImpl gameEngineImpl) {
+		player1Result(houseDicePair, gameEngineImpl);
+	}
+	
+	private void player1Result(int houseDicePair, GameEngineImpl gameEngineImpl) {
+		for (Player _player : playerList) {
+			if(_player.equals(null) || playerList.contains(null)) {
+				System.out.println("Unable to calculate result.\r\n");
 			}
+			
+			int _player1Result = playerList.get(0).getRollResult().getDice1() + playerList.get(0).getRollResult().getDice2();
+			
+			if(_player1Result == 0 || _player.getRollResult().equals(null)) {
+				System.out.println("Unable to display result.\r\n");
+			}else if(_player1Result == houseDicePair) {
+				_player.setPoints(_player.getPoints() + _player.getBet());
+			}else if(_player1Result > houseDicePair) {
+				_player.setPoints((_player.getPoints() + _player.getBet()) *2);
+			}
+			GECI.playerResult(_player, this);
+			// reset 
+			_player.placeBet(0);
+			_player.setRollResult(null);
 		}
-		
 	}
 
 	@Override

@@ -39,5 +39,9 @@ public class DicePairImpl implements DicePair {
 	public int getNumFaces() {
 		return NumFaces;
 	}
+	
+	public int totalDice() {
+		return dice1+dice2;
+	}
 
 }

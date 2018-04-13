@@ -7,22 +7,21 @@ import model.interfaces.DicePair;
 import model.interfaces.Player;
 
 public class SimplePlayer implements Player {
-	
-	   private String playerId;
-	   private String playerNAME;
-	   private int playerBET;
-	   private int playerPOINTS;
-	   private DicePair rollRESULT;
 
-	   public SimplePlayer(String playerId, String playerNAME, int playerPOINTS)
-	   {
-	     
-	      this.playerId = playerId;
-	      this.playerNAME = playerNAME;
-	      this.playerBET = 0;
-	      this.playerPOINTS = playerPOINTS;
-	      this.rollRESULT = null;
-	   }
+	private String playerId;
+	private String playerNAME;
+	private int playerBET;
+	private int playerPOINTS;
+	private DicePair rollRESULT;
+
+	public SimplePlayer(String playerId, String playerNAME, int playerPOINTS) {
+
+		this.playerId = playerId;
+		this.playerNAME = playerNAME;
+		this.playerBET = 0;
+		this.playerPOINTS = playerPOINTS;
+		this.rollRESULT = null;
+	}
 
 	@Override
 	public String getPlayerName() {
@@ -31,7 +30,7 @@ public class SimplePlayer implements Player {
 
 	@Override
 	public void setPlayerName(String playerName) {
-		 this.playerNAME = playerName;		
+		this.playerNAME = playerName;
 	}
 
 	@Override
@@ -51,10 +50,10 @@ public class SimplePlayer implements Player {
 
 	@Override
 	public boolean placeBet(int bet) {
-		if(bet < 0 || bet > playerPOINTS) {
+		if (bet < 0 || bet > playerPOINTS) {
 			// Not placing any bet
 			return false;
-		}else {
+		} else {
 			// Player points = player's point minus bet
 			playerPOINTS -= bet;
 			// set new player bet
@@ -76,15 +75,8 @@ public class SimplePlayer implements Player {
 	@Override
 	public void setRollResult(DicePair rollResult) {
 		this.rollRESULT = rollResult;
-		
-	}
-	
-	   public String toString()
-	   {
-		   String output = String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", getPlayerName(),
-				   getRollResult().getDice1(), getRollResult().getDice2(), getRollResult().getDice1() + getRollResult().getDice2());
-		   return output;
 
-	   }
+	}
+
 
 }

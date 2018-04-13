@@ -21,7 +21,8 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	private Logger logger = Logger.getLogger("assignment1");
 
 	public GameEngineCallbackImpl() {
-		logger.setLevel(Level.FINE);
+		// Set to INFO, cant print to console if set to FINE
+		logger.setLevel(Level.INFO);
 	}
 	
 	// TO DO: complete the GameEngineCallback interface implementation
@@ -37,7 +38,10 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	@Override
 	public void intermediateResult(Player player, DicePair dicePair, GameEngine gameEngine) {
 		// intermediate results logged at Level.FINE
-		logger.log(Level.FINE, player.toString());
+		String output = String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
+				dicePair.getDice1(), dicePair.getDice2(),
+				dicePair.getDice1() + dicePair.getDice2());
+		logger.log(Level.INFO, output);
 	}
 
 	/*
@@ -51,8 +55,10 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	@Override
 	public void result(Player player, DicePair result, GameEngine gameEngine) {
 		// final results logged at Level.INFO
-		logger.log(Level.INFO, String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
-				result.getDice1(), result.getDice2(), result.getDice1() + result.getDice2()));
+		String output = String.format("%s: *RESULT* Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
+				result.getDice1(), result.getDice2(),
+				result.getDice1() + result.getDice2());
+		logger.log(Level.INFO, output);
 
 	}
 
@@ -67,7 +73,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	@Override
 	public void intermediateHouseResult(DicePair dicePair, GameEngine gameEngine) {
 		// intermediate house results logged at Level.FINE
-		logger.log(Level.FINE, String.format("House: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", dicePair.getDice1(),
+		logger.log(Level.INFO, String.format("House: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", dicePair.getDice1(),
 				dicePair.getDice2(), dicePair.getDice1() + dicePair.getDice2()));
 	}
 
@@ -95,8 +101,9 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	 */
 	public void playerResult(Player player, GameEngine gameEngine) {
 		// final results logged at Level.INFO
-		logger.log(Level.INFO, String.format("Player: id=%d,  name=%d, points= %d", player.getPlayerId(),
-				player.getPlayerName(), player.getPoints()));
+		String output = String.format("Player: id= %d,  name= %s, points= %d", player.getPlayerId(),
+				player.getPlayerName(), player.getPoints());
+		logger.log(Level.INFO, output);
 	}
 
 }
