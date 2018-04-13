@@ -75,5 +75,6 @@ public class SimplePlayer implements Player {
 		this.rollRESULT = rollResult;
 		
 	}
+	
 
 }

@@ -37,8 +37,9 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	@Override
 	public void intermediateResult(Player player, DicePair dicePair, GameEngine gameEngine) {
 		// intermediate results logged at Level.FINE
-		logger.log(Level.FINE, String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
-				dicePair.getDice1(), dicePair.getDice2(), dicePair.getDice1() + dicePair.getDice2()));
+		String output = String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
+				dicePair.getDice1(), dicePair.getDice2(), dicePair.getDice1() + dicePair.getDice2());
+		logger.log(Level.FINE, output);
 	}
 
 	/*
