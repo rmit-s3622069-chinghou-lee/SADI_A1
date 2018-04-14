@@ -72,35 +72,36 @@ public class GameEngineImpl implements GameEngine {
 		dicePair = new DicePairImpl();
 		diceTotal = dicePair.getDice1() + dicePair.getDice2();
 		GECI.houseResult(dicePair, this);
-		calculateResult(diceTotal, this);
+		displayResult(diceTotal, this);
 	}
 
-	private void calculateResult(int houseDicePair, GameEngineImpl gameEngineImpl) {
-		player1Result(houseDicePair, gameEngineImpl);
-	}
+	private void displayResult(int houseDicePair, GameEngineImpl gameEngineImpl) {
 
-	private void player1Result(int houseDicePair, GameEngineImpl gameEngineImpl) {
-		for (Player _player : playerList) {
-			if (_player.equals(null) || playerList.contains(null)) {
-				System.out.println("Unable to calculate result.\r\n");
-			}
+		if (playerList.contains(null)) {
+			System.out.println("Unable to calculate result.\r\n");
+		}
 
-			for (int i = 0; i < playerList.size(); i++) {
-				int _playerResult = playerList.get(i).getRollResult().getDice1()
-						+ playerList.get(i).getRollResult().getDice2();
+{
+				for (Player _player : playerList) {
+				int _playerResult = _player.getRollResult().getDice1()
+						+ _player.getRollResult().getDice2();
 
 				if (_playerResult == 0 || _player.getRollResult().equals(null)) {
 					System.out.println("Unable to display result.\r\n");
-				} else if (_playerResult == houseDicePair) {
+				}
+				
+				if (_playerResult == houseDicePair) {
 					_player.setPoints(_player.getPoints() + _player.getBet());
 				} else if (_playerResult > houseDicePair) {
 					_player.setPoints((_player.getPoints() + _player.getBet()) * 2);
+				} else {
+					_player.setPoints(_player.getPoints());
 				}
 				GECI.playerResult(_player, this);
-				break;
 			}
 
 		}
+
 	}
 
 	@Override

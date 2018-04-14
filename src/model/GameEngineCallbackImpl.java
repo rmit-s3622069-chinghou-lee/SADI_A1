@@ -41,7 +41,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 		String output = String.format("%s: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", player.getPlayerName(),
 				dicePair.getDice1(), dicePair.getDice2(),
 				dicePair.getDice1() + dicePair.getDice2());
-		logger.log(Level.INFO, output);
+		logger.log(Level.FINE, output);
 	}
 
 	/*
@@ -73,7 +73,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	@Override
 	public void intermediateHouseResult(DicePair dicePair, GameEngine gameEngine) {
 		// intermediate house results logged at Level.FINE
-		logger.log(Level.INFO, String.format("House: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", dicePair.getDice1(),
+		logger.log(Level.FINE, String.format("House: ROLLING Dice 1: %d,  Dice 2: %d .. Total: %d", dicePair.getDice1(),
 				dicePair.getDice2(), dicePair.getDice1() + dicePair.getDice2()));
 	}
 
