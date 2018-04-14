@@ -21,8 +21,7 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 	private Logger logger = Logger.getLogger("assignment1");
 
 	public GameEngineCallbackImpl() {
-		// Set to INFO, cant print to console if set to FINE
-		logger.setLevel(Level.INFO);
+		logger.setLevel(Level.FINE);
 	}
 	
 	// TO DO: complete the GameEngineCallback interface implementation

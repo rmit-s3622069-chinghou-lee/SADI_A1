@@ -30,6 +30,13 @@ public class GameEngineImpl implements GameEngine {
 		return player.placeBet(bet);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see model.interfaces.GameEngine#rollPlayer(model.interfaces.Player, int, int, int)
+	 * 
+	 * Delay reference from stackoverflow.com
+	 * https://stackoverflow.com/questions/24104313/how-to-delay-in-java
+	 */
 	@Override
 	public void rollPlayer(Player player, int initialDelay, int finalDelay, int delayIncrement) {
 
@@ -42,6 +49,15 @@ public class GameEngineImpl implements GameEngine {
 			dicePair = new DicePairImpl();
 			diceTotal = dicePair.getDice1() + dicePair.getDice2();
 			GECI.intermediateResult(player, dicePair, this);
+			
+			try        
+			{
+			    Thread.sleep(delay);
+			} 
+			catch(InterruptedException ex) 
+			{
+			    Thread.currentThread().interrupt();
+			}
 
 		}
 		for (Player _player : playerList) {
@@ -76,30 +92,26 @@ public class GameEngineImpl implements GameEngine {
 	}
 
 	private void displayResult(int houseDicePair, GameEngineImpl gameEngineImpl) {
-
 		if (playerList.contains(null)) {
 			System.out.println("Unable to calculate result.\r\n");
+			return;
 		}
 
-{
-				for (Player _player : playerList) {
-				int _playerResult = _player.getRollResult().getDice1()
-						+ _player.getRollResult().getDice2();
+		for (Player _player : playerList) {
+			int _playerResult = _player.getRollResult().getDice1() + _player.getRollResult().getDice2();
 
-				if (_playerResult == 0 || _player.getRollResult().equals(null)) {
-					System.out.println("Unable to display result.\r\n");
-				}
-				
-				if (_playerResult == houseDicePair) {
-					_player.setPoints(_player.getPoints() + _player.getBet());
-				} else if (_playerResult > houseDicePair) {
-					_player.setPoints((_player.getPoints() + _player.getBet()) * 2);
-				} else {
-					_player.setPoints(_player.getPoints());
-				}
-				GECI.playerResult(_player, this);
+			if (_playerResult == 0 || _player.getRollResult().equals(null)) {
+				System.out.println("Unable to display result.\r\n");
 			}
 
+			if (_playerResult == houseDicePair) {
+				_player.setPoints(_player.getPoints() + _player.getBet());
+			} else if (_playerResult > houseDicePair) {
+				_player.setPoints((_player.getPoints() + _player.getBet()) * 2);
+			} else {
+				_player.setPoints(_player.getPoints());
+			}
+			GECI.playerResult(_player, this);
 		}
 
 	}
